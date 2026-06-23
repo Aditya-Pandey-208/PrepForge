@@ -8,6 +8,6 @@ public class TestController {
 
     @GetMapping("/api/test")
     public String test() {
-        return "PrepForge Spring Boot Backend Running";
+        return "Backend Connected Successfully";
     }
 }

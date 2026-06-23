@@ -68,3 +68,16 @@ body {
   padding: 10px 20px;
   cursor: pointer;
 }
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 16px;
+    position: relative;
+    top: 3px;
+}
