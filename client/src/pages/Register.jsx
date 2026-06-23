@@ -36,9 +36,11 @@ function Register() {
         .then((data) => {
             console.log(data);
 
-            setSuccessMessage(
-                "Registration Successful! " + data
-            );
+            if (data === "Email already registered") {
+                setError(data);
+            } else {
+                setSuccessMessage(data);
+            }
         })
         .catch(() => {
             setError("Registration failed.");
