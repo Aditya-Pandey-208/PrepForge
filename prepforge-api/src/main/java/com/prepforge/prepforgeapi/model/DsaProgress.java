@@ -8,23 +8,23 @@ public class DsaProgress {
 
     @Id
     private String id;
-    private String userEmail;
+    private String username;
     private String problemId;
 
     public DsaProgress() {
     }
 
-    public DsaProgress(String userEmail, String problemId) {
-        this.userEmail = userEmail;
+    public DsaProgress(String username, String problemId) {
+        this.username = username;
         this.problemId = problemId;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getProblemId() {

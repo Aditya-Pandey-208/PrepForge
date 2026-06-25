@@ -5,6 +5,7 @@ import com.prepforge.prepforgeapi.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.prepforge.prepforgeapi.model.User;
 import org.springframework.web.bind.annotation.RequestBody;
+import com.prepforge.prepforgeapi.dto.LoginResponse;
 
 @RestController
 public class UserController {
@@ -20,9 +21,7 @@ public class UserController {
     }
 
     @PostMapping("/api/login")
-    public String login(@RequestBody User user) {
+    public LoginResponse loginUser(@RequestBody User user) {
         return userService.loginUser(user);
     }
-
-
 }

@@ -36,7 +36,7 @@ function Register() {
         .then((data) => {
             console.log(data);
 
-            if (data === "Email already registered") {
+            if (data === "Email already registered" || data === "Username already taken") {
                 setError(data);
             } else {
                 setSuccessMessage(data);

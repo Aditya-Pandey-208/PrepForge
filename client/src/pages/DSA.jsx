@@ -1,165 +1,127 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/DSA.css";
 
 function DSA() {
 
-  const dsaData = {
-    Arrays: [
-      {
-        title: "Two Sum",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Best Time to Buy and Sell Stock",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Contains Duplicate",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Product of Array Except Self",
-        link: "https://dummy-link.com",
-      },
-    ],
+  const [problems, setProblems] = useState([]);
+  const [solvedProblems, setSolvedProblems] = useState([]);
+  const token = localStorage.getItem("token");
 
-    Strings: [
-      {
-        title: "Valid Anagram",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Longest Common Prefix",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Valid Palindrome",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Group Anagrams",
-        link: "https://dummy-link.com",
-      },
-    ],
+  useEffect(() => {
 
-    "Linked List": [
-      {
-        title: "Reverse Linked List",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Middle of Linked List",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Linked List Cycle",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Merge Two Sorted Lists",
-        link: "https://dummy-link.com",
-      },
-    ],
+      fetch("http://localhost:8081/api/dsa/problems")
+          .then((response) => response.json())
+          .then((data) => {
+              setProblems(data);
+          });
 
-    Trees: [
-      {
-        title: "Inorder Traversal",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Maximum Depth of Binary Tree",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Same Tree",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Diameter of Binary Tree",
-        link: "https://dummy-link.com",
-      },
-    ],
+  }, []);
 
-    Graphs: [
-      {
-        title: "Number of Islands",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Clone Graph",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Course Schedule",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Pacific Atlantic Water Flow",
-        link: "https://dummy-link.com",
-      },
-    ],
+  useEffect(() => {
 
-    DP: [
-      {
-        title: "Climbing Stairs",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "House Robber",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Coin Change",
-        link: "https://dummy-link.com",
-      },
-      {
-        title: "Longest Increasing Subsequence",
-        link: "https://dummy-link.com",
-      },
-    ],
-  };
+    fetch("http://localhost:8081/api/dsa/progress", {
+        headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const solved = data.map(progress => progress.problemId);
+                console.log(solved);
+                setSolvedProblems(solved);
+            });
 
-  return (
-    <div className="dsa-container">
+    }, []);
 
-      <header className="dsa-header">
-        <h1>DSA Roadmap</h1>
+  const groupedProblems = {};
+  problems.forEach((problem) => {
 
-        <Link to="/">
-          <button className="back-btn">
-            Back to Dashboard
-          </button>
-        </Link>
-      </header>
+      if (!groupedProblems[problem.topic]) {
+          groupedProblems[problem.topic] = [];
+      }
 
-      {Object.entries(dsaData).map(([category, questions]) => (
-        <section
-          key={category}
-          className="topic-card"
-        >
-          <h2>{category}</h2>
+      groupedProblems[problem.topic].push(problem);
+  });
 
-          {questions.map((question) => (
-            <div
-              key={question.title}
-              className="question-row"
-            >
-              <input type="checkbox" />
+    const handleCheckboxChange = (problemId) => {
+        const token = localStorage.getItem("token");
+        fetch("http://localhost:8081/api/dsa/progress", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                problemId: problemId
+            })
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data === "Solved") {
 
-              <a
-                href={question.link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {question.title}
-              </a>
-            </div>
-          ))}
-        </section>
-      ))}
+                setSolvedProblems(previous => [
+                    ...previous,
+                    problemId
+            ]);
+            } else {
+                setSolvedProblems(previous =>
+                    previous.filter(id => id !== problemId)
+                );
+            }
+        });
+    };
 
-    </div>
+    return (
+      <div className="dsa-container">
+
+          <header className="dsa-header">
+              <h1>DSA Roadmap</h1>
+
+              <Link to="/">
+                  <button className="back-btn">
+                      Back to Dashboard
+                  </button>
+              </Link>
+          </header>
+
+          {Object.entries(groupedProblems).map(
+            ([topic, questions]) => (
+                <section
+                    key={topic}
+                    className="topic-card"
+                >
+                    <h2>{topic}</h2>
+                    {questions.map((problem) => (
+                      <div
+                          key={problem.id}
+                          className="question-row"
+                      >
+                        <input
+                            type="checkbox"
+                            checked={solvedProblems.includes(problem.id)}
+                            onChange={() => handleCheckboxChange(problem.id)}
+                        />
+
+                          <a
+                              href={problem.link}
+                              target="_blank"
+                              rel="noreferrer"
+                          >
+                              {problem.name}
+                          </a>
+
+                          <span>
+                              {problem.difficulty}
+                          </span>
+                      </div>
+                  ))}
+
+                </section>
+            )
+        )}
+
+      </div>
   );
 }
 

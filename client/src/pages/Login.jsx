@@ -24,19 +24,22 @@ function Login() {
           password,
         }),
       })
-        .then((response) => response.text())
+        .then((response) => response.json())
 
         .then((data) => {
-          console.log(data);
-          if (data !== "Invalid Credentials") {
-              setError("");
-              setSuccess("");
-              localStorage.setItem("username", data);
-              navigate("/");
-          } else {
-              setError(data);
-              setSuccess("");
-          }
+          if (data.token) {
+            setError("");
+            setSuccess("");
+
+            localStorage.setItem("username", data.username);
+            localStorage.setItem("token", data.token);
+
+            navigate("/");
+
+        } else {
+            setError("Invalid Credentials");
+            setSuccess("");
+        }
         })
         .catch(() => {
           setError("Login Failed");

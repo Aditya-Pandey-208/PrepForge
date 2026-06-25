@@ -14,11 +14,11 @@ public class DsaProgressService {
         this.dsaProgressRepository = dsaProgressRepository;
     }
 
-    public String toggleProgress(String userEmail, String problemId) {
-        DsaProgress existing = dsaProgressRepository.findByUserEmailAndProblemId(userEmail, problemId);
+    public String toggleProgress(String username, String problemId) {
+        DsaProgress existing = dsaProgressRepository.findByUsernameAndProblemId(username, problemId);
 
         if(existing == null) {
-            DsaProgress progress = new DsaProgress(userEmail, problemId);
+            DsaProgress progress = new DsaProgress(username, problemId);
             dsaProgressRepository.save(progress);
             return "Solved";
         }
@@ -27,8 +27,8 @@ public class DsaProgressService {
         return "Unsolved";
     }
 
-    public List<DsaProgress> getSolvedProblems(String userEmail) {
-        return dsaProgressRepository.findByUserEmail(userEmail);
+    public List<DsaProgress> getSolvedProblems(String username) {
+        return dsaProgressRepository.findByUsername(username);
     }
 
 }

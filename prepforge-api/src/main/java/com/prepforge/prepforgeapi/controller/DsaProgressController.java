@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.security.core.Authentication;
 import com.prepforge.prepforgeapi.model.DsaProgress;
 import com.prepforge.prepforgeapi.service.DsaProgressService;
 
@@ -22,12 +22,14 @@ public class DsaProgressController {
     }
 
     @PostMapping("/api/dsa/progress")
-    public String toggleProgress(@RequestBody DsaProgress progress) {
-        return dsaProgressService.toggleProgress(progress.getUserEmail(), progress.getProblemId());
+    public String toggleProgress(@RequestBody DsaProgress progress, Authentication authentication) {
+        String username = authentication.getName();
+        return dsaProgressService.toggleProgress(username, progress.getProblemId());
     }
 
     @GetMapping("/api/dsa/progress")
-    public List<DsaProgress> getSolvedProblems(@RequestParam String userEmail) {
-        return dsaProgressService.getSolvedProblems(userEmail);
+    public List<DsaProgress> getSolvedProblems(Authentication authentication) {
+        String username = authentication.getName();
+        return dsaProgressService.getSolvedProblems(username);
     }
 }
