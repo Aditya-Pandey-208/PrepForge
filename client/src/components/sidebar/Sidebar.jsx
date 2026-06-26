@@ -22,11 +22,6 @@ const menuItems = [
         name: "Subjects",
         path: "/subjects",
         icon: "📚"
-    },
-    {
-        name: "Leaderboard",
-        path: "/leaderboard",
-        icon: "🏆"
     }
 ];
 

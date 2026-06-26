@@ -37,7 +37,7 @@ body {
 
   padding: 25px;
   margin-bottom: 25px;
-
+   overflow: hidden;
   border-radius: 12px;
 }
 
@@ -46,21 +46,19 @@ body {
 }
 
 .pie-chart {
-  width: 150px;
-  height: 150px;
+    width: 220px;
+    height: 220px;
 
-  border-radius: 50%;
+    border-radius: 50%;
 
-  border: 12px solid #d3d3d3;
+    border: 16px solid #d3d3d3;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  font-size: 24px;
-  font-weight: bold;
-
-  margin-bottom: 15px;
+    font-size: 42px;
+    font-weight: bold;
 }
 
 .continue-btn {
@@ -80,4 +78,56 @@ body {
     font-size: 16px;
     position: relative;
     top: 3px;
+}
+
+.topic-progress-row{
+
+    display:flex;
+
+    align-items:center;
+
+    margin:8px 0;
+
+}
+
+.topic-name{
+
+    flex:2;
+
+}
+
+.topic-percentage{
+
+    width:50px;
+
+    text-align:right;
+
+    font-weight:bold;
+
+}
+
+.topic-count{
+
+    width:70px;
+
+    text-align:right;
+
+}
+
+.dsa-content {
+    display: flex;
+    align-items: center;
+    gap: 60px;  
+}
+
+.dsa-chart {
+    width: 260px;
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+}
+
+.dsa-topics {
+    flex: 1;
 }
