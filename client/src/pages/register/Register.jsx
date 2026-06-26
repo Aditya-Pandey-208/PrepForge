@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import "../styles/Register.css";
+import AppLayout from "../../layouts/AppLayout";
+import "./Register.css";
 
 function Register() {
     const [username, setUsername] = useState("");
@@ -48,6 +49,7 @@ function Register() {
     };
 
     return (
+    <AppLayout>
         <div className="register-container">
 
         <div className="register-card">
@@ -117,6 +119,7 @@ function Register() {
         </div>
 
         </div>
+    </AppLayout>
     );
 }
 

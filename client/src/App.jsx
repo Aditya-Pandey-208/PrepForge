@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 
-import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
-import DSA from "./pages/DSA";
-import Development from "./pages/Development";
-import Subjects from "./pages/Subjects";
-import Register from "./pages/Register";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Login from "./pages/login/Login";
+import DSA from "./pages/dsa/DSA";
+import Development from "./pages/development/Development";
+import Subjects from "./pages/subjects/Subjects";
+import Register from "./pages/register/Register";
 
 function App() {
   return (

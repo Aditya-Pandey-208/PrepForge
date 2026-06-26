@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import "../styles/DSA.css";
+import AppLayout from "../../layouts/AppLayout";
+import "./DSA.css";
 
 function DSA() {
 
@@ -73,16 +74,11 @@ function DSA() {
     };
 
     return (
+    <AppLayout>
       <div className="dsa-container">
 
           <header className="dsa-header">
               <h1>DSA Roadmap</h1>
-
-              <Link to="/">
-                  <button className="back-btn">
-                      Back to Dashboard
-                  </button>
-              </Link>
           </header>
 
           {Object.entries(groupedProblems).map(
@@ -122,6 +118,7 @@ function DSA() {
         )}
 
       </div>
+    </AppLayout>
   );
 }
 

@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import "../styles/Login.css";
+import AppLayout from "../../layouts/AppLayout";
+import "./Login.css";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -47,6 +48,7 @@ function Login() {
         });
     };
     return (
+    <AppLayout>
       <div className="login-container">
 
         <div className="login-card">
@@ -101,6 +103,7 @@ function Login() {
         </div>
 
       </div>
+    </AppLayout>
     );
 }
 
