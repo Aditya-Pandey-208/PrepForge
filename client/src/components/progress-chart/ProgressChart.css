@@ -1,0 +1,10 @@
+/* ===========================
+   Chart Container
+=========================== */
+
+.progress-chart {
+    width: 50%;
+    height: 260px;
+
+    flex-shrink: 0;
+}
