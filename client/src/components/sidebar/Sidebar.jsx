@@ -20,7 +20,7 @@ const menuItems = [
     },
     {
         name: "Subjects",
-        path: "/subjects",
+        path: "/subject",
         icon: "📚"
     }
 ];
