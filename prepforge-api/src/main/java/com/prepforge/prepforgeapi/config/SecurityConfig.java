@@ -30,7 +30,9 @@ public class SecurityConfig {
                     "/api/login",
                     "/api/register",
                     "/api/test",
-                    "/api/dsa/problems"
+                    "/api/dsa/problems",
+                    "/api/development/problems",
+                    "/api/subject/problems"
                 ).permitAll()
 
                 .anyRequest().authenticated()

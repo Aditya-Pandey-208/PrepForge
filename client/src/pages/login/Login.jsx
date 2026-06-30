@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import AppLayout from "../../layouts/AppLayout";
 import "./Login.css";
 
@@ -9,11 +11,22 @@ function Login() {
     const [password, setPassword] = useState("");
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
+    const [expiredMessage, setExpiredMessage] = useState("");
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        if (params.get("expired")) {
+            setExpiredMessage("Your session has expired. Please login again.");
+            navigate("/login", { replace: true });
+        }
+    }, [location, navigate]);
 
     const handleLogin = () => {
       setError("");
       setSuccess("");
+      setExpiredMessage("");
       fetch("http://localhost:8081/api/login", {
         method: "POST",
         headers: {
@@ -31,6 +44,7 @@ function Login() {
           if (data.token) {
             setError("");
             setSuccess("");
+            setExpiredMessage("");
 
             localStorage.setItem("username", data.username);
             localStorage.setItem("token", data.token);
@@ -47,6 +61,7 @@ function Login() {
           setSuccess("");
         });
     };
+
     return (
     <AppLayout>
       <div className="login-container">
@@ -70,6 +85,13 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
+          {
+              expiredMessage &&
+              <p className="expired-message">
+                  {expiredMessage}
+              </p>
+          }
 
           <button
             className="login-btn"

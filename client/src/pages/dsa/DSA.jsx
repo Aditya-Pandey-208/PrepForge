@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AppLayout from "../../layouts/AppLayout";
+import { handleUnauthorized } from "../../utils/auth";
 import "./DSA.css";
 
 function DSA() {
@@ -26,12 +27,13 @@ function DSA() {
                 Authorization: `Bearer ${token}`
             }
         })
+            .then(handleUnauthorized)
             .then((response) => response.json())
             .then((data) => {
                 const solved = data.map(progress => progress.problemId);
-                console.log(solved);
                 setSolvedProblems(solved);
-            });
+            })
+            .catch(() => {});
 
     }, []);
 
@@ -57,7 +59,8 @@ function DSA() {
                 problemId: problemId
             })
         })
-        .then(response => response.text())
+        .then(handleUnauthorized)
+        .then((response) => response.text())
         .then(data => {
             if (data === "Solved") {
 
@@ -70,7 +73,8 @@ function DSA() {
                     previous.filter(id => id !== problemId)
                 );
             }
-        });
+        })
+        .catch(() => {});
     };
 
     return (

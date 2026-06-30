@@ -87,3 +87,10 @@
   font-weight: bold;
   margin-top: 10px;
 }
+
+.expired-message{
+    color:#ef4444;
+    font-weight:600;
+    margin-bottom:16px;
+    text-align:center;
+}

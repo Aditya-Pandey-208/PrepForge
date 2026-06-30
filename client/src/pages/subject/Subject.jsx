@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AppLayout from "../../layouts/AppLayout";
 import { handleUnauthorized } from "../../utils/auth";
-import "./Development.css";
+import "./Subject.css";
 
-function Development() {
+function Subject() {
 
   const [problems, setProblems] = useState([]);
   const [solvedProblems, setSolvedProblems] = useState([]);
@@ -12,7 +12,7 @@ function Development() {
 
   useEffect(() => {
 
-      fetch("http://localhost:8081/api/development/problems")
+      fetch("http://localhost:8081/api/subject/problems")
           .then((response) => response.json())
           .then((data) => {
               setProblems(data);
@@ -22,7 +22,7 @@ function Development() {
 
   useEffect(() => {
 
-    fetch("http://localhost:8081/api/development/progress", {
+    fetch("http://localhost:8081/api/subject/progress", {
         headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -49,7 +49,7 @@ function Development() {
 
     const handleCheckboxChange = (problemId) => {
         const token = localStorage.getItem("token");
-        fetch("http://localhost:8081/api/development/progress", {
+        fetch("http://localhost:8081/api/subject/progress", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -79,10 +79,10 @@ function Development() {
 
     return (
     <AppLayout>
-      <div className="development-container">
+      <div className="subject-container">
 
-          <header className="development-header">
-              <h1>Development Roadmap</h1>
+          <header className="subject-header">
+              <h1>Subjects Roadmap</h1>
           </header>
 
           {Object.entries(groupedProblems).map(
@@ -126,4 +126,4 @@ function Development() {
   );
 }
 
-export default Development;
+export default Subject;

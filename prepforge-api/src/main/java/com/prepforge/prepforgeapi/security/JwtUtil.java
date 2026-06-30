@@ -6,11 +6,10 @@ import java.util.Date;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 
 @Component
 public class JwtUtil {
-    private static final long EXPIRATION_TIME = 60 * 60 * 1000;     
+    private static final long EXPIRATION_TIME = 30L * 24 * 60 * 60 * 1000;     
     private static final SecretKey SECRET_KEY =
         Keys.hmacShaKeyFor("prepforge-super-secret-key-for-jwt-authentication-2026".getBytes());
 

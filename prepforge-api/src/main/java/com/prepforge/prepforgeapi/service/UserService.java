@@ -38,9 +38,6 @@ public class UserService {
     }
 
     public LoginResponse loginUser(User user) {
-        System.out.println("Login Email: " + user.getEmail());
-        System.out.println("Login Password: " + user.getPassword());
-        
         User existingUser = userRepository.findByEmail(user.getEmail());
         
         if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
