@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AppLayout from "../../layouts/AppLayout";
 import { handleUnauthorized } from "../../utils/auth";
+import API_BASE_URL from "../../config/api";
+import "../../App.css";
 import "./Development.css";
 
 function Development() {
@@ -12,7 +14,7 @@ function Development() {
 
   useEffect(() => {
 
-      fetch("http://localhost:8081/api/development/problems")
+      fetch(`${API_BASE_URL}/api/development/problems`)
           .then((response) => response.json())
           .then((data) => {
               setProblems(data);
@@ -22,7 +24,13 @@ function Development() {
 
   useEffect(() => {
 
-    fetch("http://localhost:8081/api/development/progress", {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        return;
+    }
+
+    fetch(`${API_BASE_URL}/api/development/progress`, {
         headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -49,7 +57,12 @@ function Development() {
 
     const handleCheckboxChange = (problemId) => {
         const token = localStorage.getItem("token");
-        fetch("http://localhost:8081/api/development/progress", {
+
+        if (!token) {
+            return;
+        }
+
+        fetch(`${API_BASE_URL}/api/development/progress`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -81,9 +94,15 @@ function Development() {
     <AppLayout>
       <div className="development-container">
 
-          <header className="development-header">
-              <h1>Development Roadmap</h1>
-          </header>
+            <header className="development-header">
+                <h1>Development Roadmap</h1>
+            </header>
+
+            {!token && (
+                <p className="login-message">
+                    Log in to save and track your progress.
+                </p>
+            )}
 
           {Object.entries(groupedProblems).map(
             ([topic, questions]) => (
@@ -101,6 +120,7 @@ function Development() {
                             type="checkbox"
                             checked={solvedProblems.includes(problem.id)}
                             onChange={() => handleCheckboxChange(problem.id)}
+                            disabled={!token}
                         />
 
                           <a

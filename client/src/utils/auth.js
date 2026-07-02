@@ -4,7 +4,7 @@ export function handleUnauthorized(response) {
 
         localStorage.removeItem("token");
         localStorage.removeItem("username");
-        window.location.href = "/login?expired=true";
+        window.location.replace("/");
         throw new Error("Unauthorized");
     }
 

@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Login from "./pages/login/Login";
 import DSA from "./pages/dsa/DSA";
@@ -8,53 +7,39 @@ import Subject from "./pages/subject/Subject";
 import Register from "./pages/register/Register";
 
 function App() {
-  return (
-    <Routes>
+    return (
+        <Routes>
+            <Route
+                path="/"
+                element={<Dashboard />}
+            />
 
-      <Route path="/" element={<Dashboard />} />
-      <Route
-          path="/login"
-          element={
-                  <Login />
-          }
-      />
+            <Route
+                path="/login"
+                element={<Login />}
+            />
 
-      <Route
-          path="/register"
-          element={
-                  <Register />
-          }
-      />
+            <Route
+                path="/register"
+                element={<Register />}
+            />
 
-      <Route
-          path="/dsa"
-          element={
-              <ProtectedRoute>
-                  <DSA />
-              </ProtectedRoute>
-          }
-      />
+            <Route
+                path="/dsa"
+                element={<DSA />}
+            />
 
-      <Route
-          path="/development"
-          element={
-              <ProtectedRoute>
-                  <Development />
-              </ProtectedRoute>
-          }
-      />
+            <Route
+                path="/development"
+                element={<Development />}
+            />
 
-      <Route
-          path="/subject"
-          element={
-              <ProtectedRoute>
-                  <Subject />
-              </ProtectedRoute>
-          }
-      />
-      
-    </Routes>
-  );
+            <Route
+                path="/subject"
+                element={<Subject />}
+            />
+        </Routes>
+    );
 }
 
 export default App;

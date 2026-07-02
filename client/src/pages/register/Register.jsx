@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AppLayout from "../../layouts/AppLayout";
+import API_BASE_URL from "../../config/api";
 import "./Register.css";
 
 function Register() {
@@ -30,7 +31,7 @@ function Register() {
             password
         };
 
-        fetch("http://localhost:8081/api/register", {
+        fetch(`${API_BASE_URL}/api/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

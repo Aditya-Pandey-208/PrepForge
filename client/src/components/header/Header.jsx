@@ -10,7 +10,7 @@ function Header({isSidebarOpen, setIsSidebarOpen}) {
         localStorage.removeItem("username");
         localStorage.removeItem("token");
 
-        navigate("/login");
+        window.location.replace("/");
     };
 
     return (

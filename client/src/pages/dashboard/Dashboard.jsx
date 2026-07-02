@@ -5,6 +5,7 @@ import AppLayout from "../../layouts/AppLayout";
 import { handleUnauthorized } from "../../utils/auth";
 import ProgressChart from "../../components/progress-chart/ProgressChart";
 import ProgressCard from "../../components/progress-card/ProgressCard";
+import API_BASE_URL from "../../config/api";
 
 import "./Dashboard.css";
 
@@ -81,7 +82,7 @@ function Dashboard() {
 
     useEffect(() => {
 
-        fetch("http://localhost:8081/api/dsa/problems")
+        fetch(`${API_BASE_URL}/api/dsa/problems`)
             .then((response) => response.json())
             .then((data) => {
                 setDsaProblems(data);
@@ -95,7 +96,7 @@ function Dashboard() {
 
     useEffect(() => {
 
-        fetch("http://localhost:8081/api/development/problems")
+        fetch(`${API_BASE_URL}/api/development/problems`)
             .then((response) => response.json())
             .then((data) => {
                 setDevelopmentProblems(data);
@@ -109,7 +110,7 @@ function Dashboard() {
 
     useEffect(() => {
 
-        fetch("http://localhost:8081/api/subject/problems")
+        fetch(`${API_BASE_URL}/api/subject/problems`)
             .then((response) => response.json())
             .then((data) => {
                 setSubjectProblems(data);
@@ -128,7 +129,11 @@ function Dashboard() {
 
         const token = localStorage.getItem("token");
 
-        fetch("http://localhost:8081/api/dsa/progress", {
+        if (!token) {
+            return;
+        }
+
+        fetch(`${API_BASE_URL}/api/dsa/progress`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -151,7 +156,11 @@ function Dashboard() {
 
         const token = localStorage.getItem("token");
 
-        fetch("http://localhost:8081/api/development/progress", {
+        if (!token) {
+            return;
+        }
+
+        fetch(`${API_BASE_URL}/api/development/progress`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -173,7 +182,11 @@ function Dashboard() {
 
         const token = localStorage.getItem("token");
 
-        fetch("http://localhost:8081/api/subject/progress", {
+        if (!token) {
+            return;
+        }
+
+        fetch(`${API_BASE_URL}/api/subject/progress`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
