@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AppLayout from "../../layouts/AppLayout";
 import "./Register.css";
@@ -10,6 +10,8 @@ function Register() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleRegister = () => {
 
@@ -17,6 +19,8 @@ function Register() {
             setError("Please enter the same password in both fields.");
             return;
         }
+
+        setLoading(true);
 
         setError("");
         setSuccessMessage("");
@@ -35,16 +39,27 @@ function Register() {
         })
         .then((response) => response.text())
         .then((data) => {
-            console.log(data);
+            //console.log(data);
 
             if (data === "Email already registered" || data === "Username already taken") {
                 setError(data);
+                setLoading(false);
             } else {
                 setSuccessMessage(data);
+                setError("");
+                setUsername("");
+                setEmail("");
+                setPassword("");
+                setConfirmPassword("");
+
+                setTimeout(() => {
+                    navigate("/login");
+                }, 1500);
             }
         })
         .catch(() => {
             setError("Registration failed.");
+            setLoading(false);
         });
     };
 
@@ -61,7 +76,11 @@ function Register() {
                 type="text"
                 placeholder="Enter username"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => {
+                    setUsername(e.target.value)
+                    setError("");
+                }}
+                disabled={loading}
             />
 
             <label>Email</label>
@@ -69,7 +88,11 @@ function Register() {
                 type="email"
                 placeholder="Enter email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange = {(e) => {
+                    setEmail(e.target.value);
+                    setError("");
+                }}
+                disabled={loading}
             />
 
             <label>Password</label>
@@ -77,7 +100,11 @@ function Register() {
                 type="password"
                 placeholder="Enter password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                    setPassword(e.target.value);
+                    setError("");
+                }}
+                disabled={loading}
             />
 
             <label>Confirm Password</label>
@@ -85,7 +112,11 @@ function Register() {
                 type="password"
                 placeholder="Confirm password"
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={(e) => {
+                    setConfirmPassword(e.target.value);
+                    setError("");
+                }}
+                disabled={loading}
             />
 
             {error && (
@@ -102,8 +133,10 @@ function Register() {
 
             <button 
                 className="register-btn"
-                onClick={handleRegister}>
-                Register
+                onClick={handleRegister}
+                disabled={loading}
+            >
+                {loading ? "Registering..." : "Register"}
             </button>
 
             <Link to="/login" className="login-link">
