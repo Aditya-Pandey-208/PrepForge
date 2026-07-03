@@ -40,7 +40,6 @@ function Register() {
         })
         .then((response) => response.text())
         .then((data) => {
-            //console.log(data);
 
             if (data === "Email already registered" || data === "Username already taken") {
                 setError(data);

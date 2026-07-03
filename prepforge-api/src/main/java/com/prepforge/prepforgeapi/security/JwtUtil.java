@@ -6,26 +6,34 @@ import java.util.Date;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.Claims;
+import org.springframework.beans.factory.annotation.Value;
+import jakarta.annotation.PostConstruct;
 
 @Component
 public class JwtUtil {
     private static final long EXPIRATION_TIME = 30L * 24 * 60 * 60 * 1000;     
-    private static final SecretKey SECRET_KEY =
-        Keys.hmacShaKeyFor("prepforge-super-secret-key-for-jwt-authentication-2026".getBytes());
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+    private SecretKey secretKey;
+
+    @PostConstruct
+    public void init() {
+        secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes());
+    }
 
     public String generateToken(String username) {
         return Jwts.builder()
                 .subject(username)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SECRET_KEY)
+                .signWith(secretKey)
                 .compact();
     }
 
     public String extractUsername(String token) {
 
     Claims claims = Jwts.parser()
-                .verifyWith(SECRET_KEY)
+                .verifyWith(secretKey)
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
