@@ -38,14 +38,16 @@ function Register() {
             },
             body: JSON.stringify(userData)
         })
-        .then((response) => response.text())
-        .then((data) => {
+        .then(async (response) => {
+                const data = await response.json();
 
-            if (data === "Email already registered" || data === "Username already taken") {
-                setError(data);
-                setLoading(false);
-            } else {
-                setSuccessMessage(data);
+                if (!response.ok) {
+                    setError(data.message);
+                    setLoading(false);
+                    return;
+                }
+
+                setSuccessMessage(data.message);
                 setError("");
                 setUsername("");
                 setEmail("");
@@ -56,7 +58,7 @@ function Register() {
                     navigate("/login");
                 }, 1500);
             }
-        })
+        )
         .catch(() => {
             setError("Registration failed.");
             setLoading(false);

@@ -27,7 +27,7 @@ PrepForge was built to provide a single platform for interview preparation by co
 
 # ✨ Features
 
-* 🔐 JWT Authentication
+* 🔐 JWT + BCrypt Authentication
 * 👤 User Registration & Login
 * 💾 Persistent Login (30-day JWT)
 * 📊 Interactive Progress Dashboard
@@ -228,6 +228,32 @@ http://localhost:5173
 
 ---
 
+## 🔧 Environment Variables
+
+Configure the following environment variables before running the backend:
+
+```properties
+MONGODB_URI=your_mongodb_atlas_connection_string
+JWT_SECRET=your_jwt_secret_key
+FRONTEND_URL=http://localhost:5173
+PORT=8081
+```
+
+### Example
+
+For local development:
+
+```properties
+MONGODB_URI=mongodb://localhost:27017/prepforge
+JWT_SECRET=asifugdsiuvckjvnfadoigr80giokvd
+FRONTEND_URL=http://localhost:5173
+PORT=8081
+```
+
+For production, configure these variables in your deployment platform (e.g., Render).
+
+---
+
 # 🔐 Authentication
 
 PrepForge uses JWT (JSON Web Tokens) for authentication.
@@ -266,7 +292,6 @@ PrepForge uses JWT (JSON Web Tokens) for authentication.
 
 # 🎯 Future Improvements
 
-* Password Hashing with BCrypt
 * Forgot Password
 * Email Verification
 * Revision Tracker

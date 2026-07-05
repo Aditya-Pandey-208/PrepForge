@@ -33,17 +33,18 @@ function Login() {
             },
             body: JSON.stringify(loginData),
         })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.token) {
-                    localStorage.setItem("username", data.username);
-                    localStorage.setItem("token", data.token);
-                    
-                    navigate("/");
-                } else {
+            .then(async (response) => {
+                const data = await response.json();
+                if (!response.ok) {
                     setLoading(false);
-                    setError("Invalid Credentials");
+                    setError(data.message);
+                    return;
                 }
+
+                localStorage.setItem("username", data.username);
+                localStorage.setItem("token", data.token);
+
+                navigate("/");
             })
             .catch(() => {
                 setLoading(false);

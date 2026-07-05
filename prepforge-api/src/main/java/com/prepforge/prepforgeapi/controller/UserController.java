@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.prepforge.prepforgeapi.model.User;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.prepforge.prepforgeapi.dto.LoginResponse;
+import com.prepforge.prepforgeapi.dto.MessageResponse;
 
 @RestController
 public class UserController {
@@ -16,7 +17,7 @@ public class UserController {
     }
 
     @PostMapping("/api/register")
-    public String register(@RequestBody User user) {
+    public MessageResponse register(@RequestBody User user) {
         return userService.registerUser(user);
     }
 
