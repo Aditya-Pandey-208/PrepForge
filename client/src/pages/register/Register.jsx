@@ -142,7 +142,12 @@ function Register() {
             </button>
 
             <Link to="/login" className="login-link">
-                Already have an account? Login
+                <span className="link-text">
+                    Already have an account?
+                </span>{" "}
+                <span className="link-action">
+                    Log in
+                </span>
             </Link>
 
             <Link to="/">

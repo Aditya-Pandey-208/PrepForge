@@ -1,7 +1,6 @@
 .development-container {
   min-height: 100vh;
   background-color: #f5f5f5;
-
   padding: 30px;
 }
 
@@ -9,11 +8,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   margin-bottom: 30px;
 }
 
 .development-header h1 {
   margin: 0;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+}
+
+@media (max-width: 768px) {
+
+  .development-container {
+    padding: 20px 16px;
+  }
+
+  .development-header {
+    margin-bottom: 20px;
+  }
+
 }
 

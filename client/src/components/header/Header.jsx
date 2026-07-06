@@ -24,14 +24,17 @@ function Header({isSidebarOpen, setIsSidebarOpen}) {
                     ☰
                 </button>
 
-                <Link to="/" className="logo">
-                    PrepForge
+                <Link to="/" className="brand">
+                    <img
+                        src="/favicon.png"
+                        alt="PrepForge Logo"
+                        className="brand-logo"
+                    />
+                    <h1 className="brand-title">PrepForge</h1>
                 </Link>
-
             </div>
 
-            <div className="header-right">
-
+            <div className={`header-right ${username ? "logged-in" : "logged-out"}`}>
                 {username ? (
                     <>
                         <span>{username}</span>
@@ -50,7 +53,6 @@ function Header({isSidebarOpen, setIsSidebarOpen}) {
                         </button>
                     </Link>
                 )}
-
             </div>
 
         </header>

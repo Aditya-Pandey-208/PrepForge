@@ -3,8 +3,8 @@
 =========================== */
 
 .progress-chart {
-    width: 50%;
+    width: 100%;
+    max-width: 320px;
     height: 260px;
-
     flex-shrink: 0;
 }

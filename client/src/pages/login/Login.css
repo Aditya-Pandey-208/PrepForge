@@ -1,33 +1,26 @@
 .login-container {
   min-height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-color: #f5f5f5;
+  background: #f3f4f6;
 }
 
 .login-card {
-  width: 400px;
-
-  background: white;
-
-  padding: 30px;
-
+  width: 360px;
+  max-width: 90%;
+  padding: 28px;
   border-radius: 12px;
-
   display: flex;
   flex-direction: column;
-
   gap: 12px;
-
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #fafafa;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
 }
 
 .login-card h1 {
   text-align: center;
-
   margin-bottom: 15px;
 }
 
@@ -37,41 +30,46 @@
 
 .login-card input {
   padding: 10px;
-
   border: 1px solid #ccc;
   border-radius: 6px;
-
   font-size: 14px;
 }
 
 .login-btn {
   margin-top: 10px;
-
   padding: 10px;
-
   border: none;
-
   border-radius: 6px;
-
   cursor: pointer;
-
   font-size: 16px;
+  background-color: #4f46e5;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.login-btn:hover {
+    background-color: #4338ca;
 }
 
 .register-text {
   text-align: center;
-
   margin-top: 10px;
 }
 
 .back-btn {
   width: 100%;
-
   padding: 10px;
-
+  border: 1px solid #d1d5db;
   border-radius: 6px;
-
+  background: #e5e7eb;
+  color: #374151;
+  font-weight: 500;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #d1d5db;
 }
 
 .success-message {
@@ -93,4 +91,52 @@
     font-weight:600;
     margin-bottom:16px;
     text-align:center;
+}
+
+@media (max-width: 768px) {
+
+    .login-card,
+    .register-card {
+        width: 90%;
+        max-width: 360px;
+        padding: 24px;
+    }
+
+}
+
+.login-link {
+    display: block;
+    margin-top: 16px;
+    text-align: center;
+    color: #4f46e5;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.login-link:hover {
+    color: #4338ca;
+    text-decoration: underline;
+}
+
+.login-link {
+    display: block;
+    margin-top: 16px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.link-text {
+    color: #6b7280;
+}
+
+.link-action {
+    color: #4f46e5;
+    font-weight: 600;
+    transition: color .2s ease;
+}
+
+.login-link:hover .link-action {
+    color: #4338ca;
+    text-decoration: underline;
 }

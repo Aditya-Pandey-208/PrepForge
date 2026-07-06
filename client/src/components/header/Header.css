@@ -1,19 +1,13 @@
 .header {
     height: 70px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     padding: 0 30px;
-
     background-color: white;
-
     border-bottom: 1px solid #e5e5e5;
-
     position: sticky;
     top: 0;
-
     z-index: 1000;
 }
 
@@ -32,19 +26,14 @@
 .logo {
     font-size: 32px;
     font-weight: 700;
-
     text-decoration: none;
-
     color: black;
 }
 
 .menu-button {
     font-size: 24px;
-
     background: none;
-
     border: none;
-
     cursor: pointer;
 }
 
@@ -52,17 +41,11 @@
 .logout-button {
 
     padding: 10px 18px;
-
     border: none;
-
     border-radius: 8px;
-
     cursor: pointer;
-
     background-color: #4f46e5;
-
     color: white;
-
     font-size: 15px;
 
 }
@@ -70,9 +53,59 @@
 .header {
 
     position: sticky;
-
     top: 0;
-
     z-index: 1002;
+
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.brand-logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.brand-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.brand-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+
+    .header {
+        padding: 0 16px;
+    }
+
+    .header-left {
+        gap: 12px;
+    }
+
+    .brand-logo {
+        width: 32px;
+        height: 32px;
+    }
+
+    .brand-title {
+        font-size: 24px;
+    }
+
+    /* Hide username + logout only when logged in */
+    .header-right.logged-in {
+        display: none;
+    }
 
 }

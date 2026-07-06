@@ -96,11 +96,13 @@ function Login() {
                         </p>
                     )}
 
-                    <Link
-                        to="/register"
-                        className="register-link"
-                    >
-                        New User? Register
+                    <Link to="/register" className="register-link">
+                        <span className="link-text">
+                            Don't have an account?
+                        </span>{" "}
+                        <span className="link-action">
+                            Register
+                        </span>
                     </Link>
 
                     <Link to="/">

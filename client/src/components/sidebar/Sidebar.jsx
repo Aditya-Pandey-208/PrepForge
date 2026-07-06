@@ -25,10 +25,19 @@ const menuItems = [
     }
 ];
 
+const handleLogout = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
+
+    window.location.replace("/");
+};
+
 function Sidebar({
     isSidebarOpen, 
     setIsSidebarOpen
 }) {
+
+    const username = localStorage.getItem("username");
     return (
         <>
             {isSidebarOpen && (
@@ -59,6 +68,22 @@ function Sidebar({
 
                     ))
                 }
+
+                {username && (
+                    <div className="sidebar-user">
+                        <div className="sidebar-username">
+                             <span>👤</span>
+                             <span>{username}</span>
+                        </div>
+
+                        <button
+                            className="sidebar-logout"
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </button>
+                    </div>
+                )}
             </aside>
         </>
     );
